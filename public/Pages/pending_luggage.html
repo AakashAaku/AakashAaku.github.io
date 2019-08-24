@@ -1,0 +1,99 @@
+<ons-page id="pending_luggage">
+
+        <ons-toolbar id="pendingPageToolbar">
+            <div class="left">
+                <ons-back-button></ons-back-button>
+            </div>
+          <div class="center" style="color: whitesmoke">Luggage List</div>
+          <div class="right">
+            <ons-if platform="android">
+              <ons-toolbar-button><ons-icon icon="fa-pencil"></ons-icon></ons-toolbar-button>
+              <ons-toolbar-button><ons-icon icon="ion-android-more-vertical"></ons-icon></ons-toolbar-button>
+            </ons-if>
+            <ons-else>
+                    <ons-toolbar-button id="goToNew" onclick="goToNew()">New</ons-toolbar-button>
+            </ons-else>
+          </div>
+        </ons-toolbar>
+
+        <div class="page__background"></div>
+
+        <!-- <ons-navigator #navi> -->
+                <ons-page>
+                  <div class="page__background"></div>
+                  <div class="page__content">
+                        <ons-list modifier="inset"> 
+                                <ons-lazy-repeat id="infinite-list"></ons-lazy-repeat>
+                                <!-- <ons-list-header>Chevron</ons-list-header>
+                                <ons-list-item modifier="chevron" tappable>Chevron</ons-list-item> -->
+                        </ons-list>
+              
+                    <ons-button>
+                      <span>
+                        Load more
+                      </span>
+                      <span>
+                        Loading...
+                      </span>
+                    </ons-button>
+                  </div>
+
+                  <ons-tabbar swipeable position="auto">
+                        <ons-tab page="" label="Pending" icon="ion-home, material:md-home" badge="7" active>
+                        </ons-tab>
+                        <ons-tab page="" label="Completed" icon="md-settings" active-icon="md-face">
+                        </ons-tab>
+                      </ons-tabbar>
+                </ons-page>
+         <!-- </ons-navigator> -->
+
+        <script>
+
+                function editLuggage(){
+                   // document.querySelector('#myNavigator').pushPage('Pages/edit_luggage.html');
+                    alert("Edit clicked");
+                  }; 
+               
+
+                get = async()=>{
+
+                  var url= '../api/luggage_data/ReadUserLuggage.php';
+                  console.log("url==========>>>" + url);
+                  var nextNum=1;
+                    const response = await fetch(url);
+                        const json = await response.json();
+                        console.log("data as json===========>>" + JSON.stringify(json));
+                        console.log("json===========>>" + JSON.stringify(json.records));
+                      const regNum = json.records.map(e=>e.reg_user_luggage_id);
+                      console.log("regNum as json===========>>" + regNum);
+                      const userList = document.querySelector('#infinite-list')
+                      console.log("userList as json===========>>" + userList);
+                          regNum.forEach((id,index) =>{
+                       if(index==0) index=1;
+                      userList.delegate = {
+                      createItemContent: function(i) {
+                        //return ons.createElement('<ons-list-item modifier="chevron" tappable onclick="editLuggage()">Item ' + id + '</ons-list-item>');
+                          return ons.createElement('<ons-list-item modifier="chevron" tappable onclick="goToNew()"><div class="left"><img class="list-item__thumbnail" src="https://placekitten.com/g/40/40"></div><div class="center"><span class="list-item__title">'+ id  +' this is a tile of the list</span><span class="list-item__subtitle">'+id+' this is sub title</span><span class="list-item__subtitle">this is another</span></div></ons-list-item>');
+                      },
+                      countItems: function() {
+                        return index;
+                      }
+                    };
+                  
+                    userList.refresh();
+                   });
+                  
+                  url=json.next;
+                  console.log("last line===========>>");
+                  }
+
+                  get();
+
+                  function goToNew(){
+                    // document.querySelector('#myNavigator').pushPage('Pages/new_register.html', {data: {title: 'Page 2'}});
+                    document.querySelector('#myNavigator').pushPage('Pages/new_register.html');
+                  };
+
+                 
+         </script>
+</ons-page>

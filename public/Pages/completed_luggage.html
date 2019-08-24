@@ -1,0 +1,69 @@
+<ons-page id="completed_luggage">
+        <ons-toolbar id="completedPageToolbar">
+            <div class="left">
+                <ons-back-button></ons-back-button>
+              </div>
+          <div class="center" style="color: whitesmoke">Returned Luggage</div>
+          <div class="right">
+            <ons-if platform="android">
+              <ons-toolbar-button><ons-icon icon="fa-pencil"></ons-icon></ons-toolbar-button>
+              <ons-toolbar-button><ons-icon icon="ion-android-more-vertical"></ons-icon></ons-toolbar-button>
+            </ons-if>
+          </div>
+        </ons-toolbar>
+    
+        <div class="page__background">Who's watching?</div>
+    
+        <div class="page__background"></div>
+
+        <!-- <ons-navigator #navi> -->
+                <ons-page>
+                  <div class="page__background"></div>
+                  <div class="page__content">
+                        <ons-list>
+                                <ons-lazy-repeat id="infinite-list"></ons-lazy-repeat>
+                                <!-- <ons-list-header>Chevron</ons-list-header>
+                                <ons-list-item modifier="chevron" tappable>Chevron</ons-list-item> -->
+                        </ons-list>
+              
+                    <ons-button
+                      modifier="large quiet"
+                      (disabled)="isLoading"
+                      (click)="loadMore()"
+                    >
+                      <span [hidden]="isLoading">
+                        Load more
+                      </span>
+                      <span [hidden]="!isLoading">
+                        Loading...
+                      </span>
+                    </ons-button>
+                  </div>
+
+                  <ons-tabbar swipeable position="auto">
+                        <ons-tab page="" label="Pending" icon="ion-home, material:md-home" badge="7">
+                        </ons-tab>
+                        <ons-tab page="" label="Completed" icon="md-settings" active-icon="md-face" active>
+                        </ons-tab>
+                      </ons-tabbar>
+                </ons-page>
+         <!-- </ons-navigator> -->
+
+        <script>
+
+                ons.ready(function() {
+                    var infiniteList = document.getElementById('infinite-list');
+                  
+                    infiniteList.delegate = {
+                      createItemContent: function(i) {
+                        return ons.createElement('<ons-list-item modifier="chevron" tappable>Item ' + i + '</ons-list-item>');
+                      },
+                      countItems: function() {
+                        return 10;
+                      }
+                    };
+                  
+                    infiniteList.refresh();
+                  });
+         </script>
+</ons-page>

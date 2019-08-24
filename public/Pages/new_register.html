@@ -1,0 +1,103 @@
+<ons-page id="new_register">
+          <ons-toolbar id="registerPageToolBar">
+              <div class="left">
+                  <ons-back-button></ons-back-button>
+                </div>
+            <div class="center" style="color: whitesmoke">Register New Luggage</div>
+            <div class="right">
+              <ons-if platform="android">
+                <ons-toolbar-button><ons-icon icon="fa-pencil"></ons-icon></ons-toolbar-button>
+                <ons-toolbar-button><ons-icon icon="ion-android-more-vertical"></ons-icon></ons-toolbar-button>
+              </ons-if>
+            </div>
+          </ons-toolbar>
+      
+          <div style="margin: 20px auto 5px; text-align: center;">Fill the information for registering luggage</div>
+          <div class="page__background"> </div>
+
+         <div id="formWrapper" class="formWrapper">
+            <div>
+                <ons-action-sheet-button>
+                    <div class="user_thumbnail" style="background-color: #dd6218"><ons-icon icon="fa-camera"></ons-icon></div>
+                </ons-action-sheet-button>
+            </div>
+  
+            <div>
+                <ons-action-sheet-button>
+                    <ons-input id="luggagenumber"  type="number"  modifier="underbar" placeholder="No." float></ons-input>
+                </ons-action-sheet-button>
+            </div>
+            <div>
+                <ons-action-sheet-button>
+                    <ons-input id="guestname" modifier="underbar" placeholder="Guest Full Name" float></ons-input>
+                </ons-action-sheet-button>
+            </div>
+            <div>
+                <ons-action-sheet-button>
+                    <ons-input id="receiptdatetime" modifier="underbar" type="date" placeholder="Receipt Date/Time" float></ons-input>
+                </ons-action-sheet-button>
+            </div>
+            <div>
+                <ons-action-sheet-button>
+                    <div>
+                        Return:&nbsp;&nbsp;<ons-switch id="isreturned"></ons-switch>
+                       </div>
+                </ons-action-sheet-button>
+            </div>
+            <div>
+                <ons-action-sheet-button>
+                    Show hide on switch enable/disable 
+                </ons-action-sheet-button>
+            </div>
+            <div>
+                <ons-action-sheet-button>
+                    <ons-button modifier="large" onclick="registerNewLuggage()">Register</ons-button>
+                </ons-action-sheet-button>
+            </div>
+         </div>
+         
+
+
+          <ons-action-sheet id="sheet" cancelable title="From template">
+            <ons-action-sheet-button icon="md-square-o" onclick="app.hideFromTemplate()">Label</ons-action-sheet-button>
+            <ons-action-sheet-button icon="md-square-o" onclick="app.hideFromTemplate()">Label</ons-action-sheet-button>
+            <ons-action-sheet-button icon="md-square-o" onclick="app.hideFromTemplate()" modifier="destructive">Label</ons-action-sheet-button>
+            <ons-action-sheet-button icon="md-close" onclick="app.hideFromTemplate()">Cancel</ons-action-sheet-button>
+          </ons-action-sheet>
+          <ons-bottom-toolbar id="buttomToolBar">
+              <div class="">
+                  <!-- Left part -->
+               </div>
+          </ons-bottom-toolbar> 
+
+          <script>
+               
+           // function registerNewLuggage(){
+              const registerNewLuggage = async () => {
+                var luggage_info={
+                   "guestname":document.getElementById('guestname').value,
+                   "check_in": document.getElementById('receiptdatetime').value,
+                   "check_out": document.getElementById('receiptdatetime').value,
+                   "status": document.getElementById('isreturned').value,
+                   "luggage_image": document.getElementById('receiptdatetime').value,
+               };
+                console.log("reg user luggage=============>>>" + JSON.stringify(luggage_info));
+                try{
+                  var url= '../api/luggage_data/CreateUserLuggage.php';
+                   console.log("url==========>>>" + url);
+                    const response = await fetch('../api/luggage_data/CreateUserLuggage.php',{
+                      method: 'POST',
+                      body: JSON.stringify(luggage_info), // string or object
+                      headers: {
+                          'Content-Type': 'application/json'
+                     }
+                 });
+
+                 const myJson = await response.json();
+                 console.log("myJonsRecord=========>>> " + JSON.stringify(myJson));
+                }catch{
+                    console.log("Error: while saving ")
+                }
+               }
+          </script>
+</ons-page>

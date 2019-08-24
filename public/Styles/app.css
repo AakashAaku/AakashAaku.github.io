@@ -1,0 +1,73 @@
+
+/* all page tool bar style start */
+#mainPageToolbar{
+    background-color: #ef3e29;
+    color: #fff;
+    border-color: #e1e1e1;
+}
+
+#buttomToolBar{
+  background-color: #ef3e29;
+    color: #fff;
+    border-color: #e1e1e1;
+}
+
+#pendingPageToolbar{
+  background-color: #ef3e29;
+  color: #fff;
+  border-color: #e1e1e1;
+}
+
+#registerPageToolBar{
+  background-color: #ef3e29;
+  color: #fff;
+  border-color: #e1e1e1;
+}
+
+#completedPageToolbar{
+  background-color: #ef3e29;
+  color: #fff;
+  border-color: #e1e1e1;
+}
+
+#frequentPageToolbar{
+  background-color: #ef3e29;
+  color: #fff;
+  border-color: #e1e1e1;
+}
+
+
+/* all page tool bar style end */
+
+
+/* main Page css start */
+
+.user_cover {
+    padding: 0px 40px;
+    margin: 20px 0px;
+  }
+
+  .username {
+    text-align: center;
+    color: white;
+    width: 100%;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  .user_thumbnail {
+    width: 100px;
+    height: 100px;
+    display: table;
+    text-align: center;
+    margin: auto;
+  }
+
+  .user_thumbnail ons-icon {
+    font-size: 70px;
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+
+/* main page css end */

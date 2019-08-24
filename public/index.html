@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="/favicon.ico" rel="icon" type="image/png" />
+  <link rel="stylesheet" href="Styles/app.css">
+  <link rel="stylesheet" href="../Content/css/onsenui.min.css">
+  <link rel="styleshet" href="../Content/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="../Content/css/onsen-css-components.min.css">
+  <script src="../Content/js/onsenui.min.js"></script>
+  <script src="Scripts/app.js"></script>
+  <script>
+    // if('serviceWorker' in navigator){
+    //   navigator.serviceWorker.register('serviceWorker.js')
+    //   .then(()=>console.log("service worker registered"))
+    //   .catch(e=>console.log("failed to register " + e));
+    // }
+
+    // if('serviceWorker' in navigator){
+    //   window.addEventListener('load',()=>{
+    //      navigator.serviceWorker.register('sWorker.js')
+    //      .then((reg)=>{
+    //        console.log("new service worker registerd: ",reg);
+    //      }).catch((ex)=>{
+    //         console.log("Error while registering : ",ex);
+    //      });
+    //   });
+    // }
+  </script>
+</head>
+<body>
+  <!-- <ons-button onclick="alert('You clicked me!')">Click Me</ons-button> -->
+
+  <ons-navigator id="myNavigator" page="mainPage.html"></ons-navigator>
+
+  <template id="mainPage.html">
+      <ons-page id="mainPage">
+        <ons-toolbar id="mainPageToolbar">
+          <div class="center" style="color: whitesmoke">Wel Come</div>
+          <div class="right">
+            <ons-if platform="android">
+              <ons-toolbar-button><ons-icon icon="fa-pencil"></ons-icon></ons-toolbar-button>
+              <ons-toolbar-button><ons-icon icon="ion-android-more-vertical"></ons-icon></ons-toolbar-button>
+            </ons-if>
+          </div>
+        </ons-toolbar>
+    
+        <div style="margin: 20px auto 5px; text-align: center;">Select the option for your work!!</div>
+    
+        <ons-row class="user_cover">
+          <ons-col onclick="openNewRegister()">
+            <div class="user_thumbnail" style="background-color: #dd6218"><ons-icon icon="fa-address-card"></ons-icon></div>
+            <div class="username" id="user_2_name" style="color:black">New</div>
+          </ons-col>
+          <ons-col onclick="openPending()">
+            <div class="user_thumbnail" style="background-color: #00a899"><ons-icon icon="fa-heart"></ons-icon></div>
+            <div class="username" id="user_2_name" style="color:black">Pending</div>
+          </ons-col>
+        </ons-row>
+        <ons-row class="user_cover">
+          <ons-col onclick="openComplated()">
+            <div class="user_thumbnail" style="background-color: #e3aa05"><ons-icon icon="fa-headphones"></ons-icon></div>
+            <div class="username" id="user_2_name" style="color:black">Complated</div>
+          </ons-col>
+          <ons-col onclick="openFrequent()">
+            <div class="user_thumbnail" style="background-color: #94b052"><ons-icon icon="fa-random"></ons-icon></div>
+            <div class="username" id="username_4" style="color:black">Frequent</div>
+          </ons-col>
+        </ons-row>
+        <!-- <ons-tabbar var="tabbar" position="auto">
+            <ons-tab page="" ng-attr-icon="{{!isAndroid() && 'ion-ios-search-strong' || undefined }}" label="5 Pending"></ons-tab>
+            <ons-tab page="" ng-attr-icon="{{!isAndroid() && 'ion-ios-clock-outline' || undefined }}" label="10 Completed"></ons-tab>
+        </ons-tabbar> -->
+        <ons-bottom-toolbar id="buttomToolBar">
+            <div class="">
+                <!-- Left part -->
+             </div>
+        </ons-bottom-toolbar>        
+      </ons-page>
+  </template>
+
+
+
+  <div id="message"></div>  
+  <script>
+    var div = document.getElementById('message');
+    if(location.protocol=='https:'){
+      div.innerHTML = "<h1>You're using HTTPS:</h1>";
+    }else{
+      div.innerHTML="<h1> You're using a non secure protocol</h1>";
+    }
+  </script>
+
+
+</body>
+</html>
